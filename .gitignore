@@ -1,0 +1,5 @@
+node_modules/
+.nuxt/
+www/
+# /server/www/
+npm-debug.log*

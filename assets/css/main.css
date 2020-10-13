@@ -1,0 +1,34 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: BentonSans-Medium,PingFang SC,微软雅黑,黑体,Microsoft YaHei,SimHei,Open Sans,sans-serif;
+  font-size: 14px;
+}
+footer
+{
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid #ddd;
+}
+
+a, a:hover, a:focus, a:visited
+{
+  color: #000;
+}
+
+li{
+  list-style: none;
+}
+
+h3{
+  color: #333;
+}
+
+.page-enter-active, .page-leave-active {
+  transition: opacity .3s;
+}
+.page-enter, .page-leave-active {
+  opacity: 0;
+}
+
