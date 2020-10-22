@@ -1,6 +1,6 @@
 <!--
  * @Author: vinc
- * @LastEditTime: 2020-10-13 09:13:27
+ * @LastEditTime: 2020-10-22 09:47:15
  -->
 <template>
   <div class="home-index-wrap">
@@ -95,6 +95,12 @@
           </div>
         </li>
       </ul>
+      <div class="max-width">
+        <div class="more-btn "
+             @click.stop="openPdf()">
+          read more
+        </div>
+      </div>
     </div>
     <div class="authmen-footer">
       <div class="max-width">
@@ -176,9 +182,9 @@ export default {
           },
           {
             icon: require("~/assets/images/icon2.jpg"),
-            title: "Data Marketplace",
+            title: "TEE technology",
             content:
-              "Ontology’s decentralized data marketplace is designed to allow individuals and organizations to monetize and acquire data in a trusted, standardized, and cost-effective manner."
+              "The core of Levitom network is a set of Heterogeneous Consensus Graph algorithm (HCGraph) based on trusted technology. HCGraph is a combination of trusted computing technology based on heterogeneous TEE (Trusted Execution Environment) and graph computing technology based on small world network. HCGraph makes use of the transitivity of trust and uses the gossip protocol to realize the trusted relationship between consensus nodes using different TEE technologies."
           }
         ]
       },
@@ -209,6 +215,9 @@ export default {
     };
   },
   methods: {
+    openPdf () {
+      window.open(`/authmen.pdf?key=${Math.random()}`);
+    },
     _isMobile () {
       return /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent);
     },
@@ -271,7 +280,48 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.more-btn {
+  outline: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  position: relative;
+  padding: 0.5em 1em;
+  background-color: rgba(227, 10, 23, 0.5);
+  z-index: 1;
+  overflow: hidden;
+  width: 260px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  &::before {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    background-color: #e30a17;
+    /* 变化位置的代码 */
+    top: 0;
+    left: 0;
+    transform-origin: center;
+    transform: scale3d(0, 0, 0);
+    transition: transform 0.45s ease-in-out;
+    /* *********** */
+  }
+  &:hover::before {
+    transform: scale3d(30, 15, 15);
+  }
+}
 @media screen and (max-width: 1000px) {
+  .more-btn {
+    font-size: 16px !important;
+    width: 220px !important;
+    height: 44px !important;
+  }
   .authmen-logo {
     display: none;
   }
@@ -330,6 +380,7 @@ export default {
       }
     }
     .solutions-list {
+      margin-bottom: 50px;
       li {
         height: auto !important;
         display: flex;
@@ -490,7 +541,7 @@ export default {
       border-radius: 10px;
       width: 100%;
       max-width: 800px;
-      object-fit:fill;
+      object-fit: fill;
     }
   }
   .main-feature {
