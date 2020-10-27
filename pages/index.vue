@@ -1,6 +1,6 @@
 <!--
  * @Author: vinc
- * @LastEditTime: 2020-10-22 09:47:15
+ * @LastEditTime: 2020-10-27 11:10:51
  -->
 <template>
   <div class="home-index-wrap">
@@ -12,16 +12,30 @@
         <div class="logo-r">
           <ul>
             <li>
-              <a href="#HOME"
-                 :class="{active: $route.hash == '#HOME'}">HOME</a>
+              <a href="#HOME" :class="{ active: $route.hash == '#HOME' }"
+                >HOME</a
+              >
             </li>
             <li>
-              <a href="#MAINFEATURES"
-                 :class="{active: $route.hash == '#MAINFEATURES'}">MAIN FEATURES</a>
+              <a
+                href="#Technology"
+                :class="{ active: $route.hash == '#Technology' }"
+                >TEHNOLOGY</a
+              >
             </li>
             <li>
-              <a href="#SOLUTIONS"
-                 :class="{active: $route.hash == '#SOLUTIONS'}">SOLUTIONS</a>
+              <a
+                href="#characteristics"
+                :class="{ active: $route.hash == '#characteristics' }"
+                >CHARACTERISTICS</a
+              >
+            </li>
+            <li>
+              <a
+                href="#Advantages"
+                :class="{ active: $route.hash == '#Advantages' }"
+                >ADVANTAGES</a
+              >
             </li>
           </ul>
         </div>
@@ -33,74 +47,114 @@
       </div>
     </div>
     <div class="login-container">
-      <div class="home-index"
-           id="HOME">
-        <h1>
-          Trusted Cross-Blockchain
-          <span>Storage Protocol</span>
-        </h1>
-        <div>More secure and more economical distributed storage protocol based on Trusted Computing.</div>
+      <div class="home-index" id="HOME">
+        <div class="home-index-d" :class="{ active: homeIndexActive }">
+          <h1>
+            Trusted Cross-Blockchain
+            <span>Storage Protocol</span>
+          </h1>
+          <div>
+            More secure and more economical distributed storage protocol based
+            on Trusted Computing.
+          </div>
+        </div>
       </div>
       <pointwave :color="0xe30a17" />
-      <div class="arrow"
-           :class="{active: scrollTop >= 150}">
+      <div class="arrow" :class="{ active: scrollTop >= 150 }">
         <img src="~/assets/images/arrow_d.svg" />
       </div>
     </div>
     <div class="authmen-video">
-      <video controls
-             poster="/video_cover.png">
-        <source src="~/assets/js/video.mp4"
-                type="video/mp4" />
+      <video controls poster="/video_cover.png">
+        <source src="~/assets/js/video.mp4" type="video/mp4" />
       </video>
     </div>
-    <div class="main-feature"
-         id="MAINFEATURES"
-         ref="mainFeature">
-      <h3 class="pcTitle"
-          :style="{'transform': `translate3d(${mainFeatureTop < 900 ? (mainFeatureTop - 700) / 5 : 0}px, 0px, 0px)`}"
-          v-if="!kind">{{mainObj.title}}</h3>
-      <h3 class="wapTitle">{{mainObj.title}}</h3>
-      <ul class="main-list max-width">
-        <li v-for="(item, index) in mainObj.list"
-            :key="index">
-          <div class="icon">{{item.icon}}</div>
-          <div class="information">
-            <div class="main-title">{{item.title}}</div>
-            <p class="main-describe">{{item.content}}</p>
-          </div>
+    <div class="introduce-authmen" ref="introduce">
+      <div class="max-width">
+        <div class="public-title" :class="{ 'animate one': showAbout }">
+          <span v-for="(item, index) in 'What'.split('')" :key="index + 100">{{
+            item
+          }}</span
+          >&nbsp;
+          <span v-for="(item, index) in 'is'.split('')" :key="index + 200">{{
+            item
+          }}</span
+          >&nbsp;
+          <span
+            v-for="(item, index) in 'Authmen?'.split('')"
+            :key="index + 300"
+            >{{ item }}</span
+          >
+        </div>
+      </div>
+      <p class="max-width">
+        <img src="~/assets/images/about.png" />
+        <span>
+          Authmen is a trusted blockchain storage protocol which is based on the
+          distributed idea of blockchain. It mainly solves the problems of data
+          storage and data flow. More concretely, it aims to provide distributed
+          trust feature of the underlying blockchain technology, high
+          availability, openness and transparency, tamper proof, security and
+          privacy-preserving kinds of technical characteristics building a
+          tamper-proof and a traceability system.
+        </span>
+      </p>
+    </div>
+    <div class="main-feature" id="characteristics">
+      <h3 class="pcTitle max-width public-title">
+        {{ characteristicsObj.title }}
+      </h3>
+      <h3 class="wapTitle public-title">{{ characteristicsObj.title }}</h3>
+      <ul class="characteristics-list max-width">
+        <li v-for="(item, index) in characteristicsObj.list" :key="index">
+          <span>{{ item.icon }}</span>
+          <p>{{ item.title }}</p>
         </li>
       </ul>
     </div>
-    <div class="main-feature main-solutions"
-         id="SOLUTIONS"
-         ref="solutions">
-      <h3 class="pcTitle"
-          :style="{'transform': `translate3d(${solutionsTop < 950 ? (solutionsTop - 700) / 5 : 0}px, 0px, 0px)`}">{{solutionsObj.title}}</h3>
-      <h3 class="wapTitle">{{solutionsObj.title}}</h3>
+    <div class="main-feature main-solutions" id="Advantages" ref="solutions">
+      <!-- :style="{'transform': `translate3d(${solutionsTop < 950 ? (solutionsTop - 700) / 5 : 0}px, 0px, 0px)`}" -->
+      <h3 class="pcTitle max-width public-title">{{ solutionsObj.title }}</h3>
+      <h3 class="wapTitle public-title">{{ solutionsObj.title }}</h3>
       <ul class="solutions-list max-width">
-        <li v-for="(item, index) in solutionsObj.list"
-            :key="index">
-          <div class="wapPicture"
-               :class="{active: solutionsIndex >= (index + 1)}">
+        <li v-for="(item, index) in solutionsObj.list" :key="index">
+          <div
+            class="wapPicture"
+            :class="{ active: solutionsIndex >= index + 1 }"
+          >
             <img :src="item.icon" />
           </div>
           <div class="information">
-            <div class="main-title">{{item.title}}</div>
-            <p class="main-describe">{{item.content}}</p>
+            <div class="main-title">{{ item.title }}</div>
+            <p class="main-describe">{{ item.content }}</p>
           </div>
-          <div class="picture"
-               :class="{active: solutionsIndex == (index + 1)}">
+          <div class="picture" :class="{ active: solutionsIndex == index + 1 }">
             <img :src="item.icon" />
           </div>
         </li>
       </ul>
       <div class="max-width">
-        <div class="more-btn "
-             @click.stop="openPdf()">
-          read more
-        </div>
+        <div class="more-btn" @click.stop="openPdf()">read more</div>
       </div>
+    </div>
+    <div class="main-feature" id="Technology" ref="mainFeature">
+      <!-- :style="{'transform': `translate3d(${mainFeatureTop < 900 ? (mainFeatureTop - 700) / 5 : 0}px, 0px, 0px)`}" -->
+      <h3 class="pcTitle max-width public-title">{{ mainObj.title }}</h3>
+      <h3 class="wapTitle public-title">{{ mainObj.title }}</h3>
+      <div class="trias max-width">
+        Partnership:Trias <img src="@/assets/images/Trias_logo_f.png" />
+      </div>
+      <ul class="main-list max-width">
+        <li v-for="(item, index) in mainObj.list" :key="index">
+          <div class="icon">
+            <img :src="item.icon" />
+          </div>
+          <div class="information">
+            <div class="main-title">{{ item.title }}</div>
+            <p class="main-describe">{{ item.content }}</p>
+          </div>
+        </li>
+      </ul>
     </div>
     <div class="authmen-footer">
       <div class="max-width">
@@ -109,13 +163,17 @@
           <p>A trusted blockchain storage protocol</p>
         </div>
         <div class="icons">
-          <span v-for="(item, index) in footerIcons"
-                @click.stop="changeLink(item)"
-                :key="index">
+          <span
+            v-for="(item, index) in footerIcons"
+            @click.stop="changeLink(item)"
+            :key="index"
+          >
             <img :src="item.icon" />
           </span>
         </div>
-        <div class="copyright">Copyright © 2020, All Right Reserved. Authmen Web.</div>
+        <div class="copyright">
+          Copyright © 2020, All Right Reserved. Authmen Web.
+        </div>
       </div>
     </div>
   </div>
@@ -127,14 +185,16 @@ import backgroundImg from "@/assets/images/background.png";
 
 export default {
   layout: "home",
-  async asyncData ({ $axios }) {
+  async asyncData({ $axios }) {
     return {};
   },
   components: { Pointwave },
   computed: {},
-  data () {
+  data() {
     return {
       title: "Authmen",
+      showAbout: false,
+      homeIndexActive: false,
       hotList: [],
       isShow: false,
       kind: 0,
@@ -143,88 +203,120 @@ export default {
       solutionsTop: 0,
       solutionsHeight: 0,
       mainObj: {
-        title: "Main Features",
+        title: "Technology Framework",
+        list: [
+          {
+            icon: require("~/assets/images/icons/icon1.png"),
+            title: "The trusted network",
+            content: `The trusted network constructed by Levitom layer of Trias maintains a unique white list for each storage node, which can prevent the loading of abnormal programs and effectively block network security attacks. At the same time, HCGgraph is a trusted computing technology based on heterogeneous TEE. With the help of Gossip protocol, a "trusted acquaintance" network is constructed between consensus nodes using different TEE technologies, and a "conspiracy default" model of global nodes is constructed to locate trusted nodes efficiently, which makes consensus more efficient and cost-effective.`,
+          },
+          {
+            icon: require("~/assets/images/icons/icon2.png"),
+            title: "TEE",
+            content: `At the same time, the TEE technology of Trias does not rely on a single category of hardware, so it has stronger compatibility. The use of TEE technology can verify and protect the whole life cycle of the computer running environment on the basis of the - 1 layer of the hardware root. At the same time, under the TEE security defense model of Trias, it becomes a new incentive oriented security model, which allows the defender to actively contribute the defense nodes and computing power of TEE, and get the corresponding advantage economic stimulation according to the defense contribution provided in the Trias security network. Through the trusted computing of Trias, multi-party, remote and heterogeneous data storage, sharing and computing can be realized under the premise of maintaining data ownership and privacy.`,
+          },
+          {
+            icon: require("~/assets/images/icons/icon3.png"),
+            title: "ZK-snarks",
+            content: `In addition, the data of trusted hardware and program based on Trias can ensure that the information or data will not be disclosed in the trusted program, and ZK-snarks are used to ensure the privacy of the data.`,
+          },
+          {
+            icon: require("~/assets/images/icons/icon4.png"),
+            title: "Trusted Computing",
+            content: `Through trusted computing, Authmen enables different tee protocols to collect the latest status of neighboring nodes, check and record historical information, and propagate the results among other nodes through gossip protocol, and form a reputation network. It repeatedly selects "the most difficult point to lie" as its repeated function contract presentation, forming a robust and efficient running environment, and building a trusted computing based environment Based on the blockchain distributed storage security network.`,
+          },
+        ],
+      },
+      solutionsObj: {
+        title: "Advantages of Authmen",
+        list: [
+          {
+            icon: require("~/assets/images/imgs/img1.png"),
+            title: "Transparency",
+            content: "The storage mechanism is open and transparent.",
+          },
+          {
+            icon: require("~/assets/images/imgs/img2.png"),
+            title: "Fairness",
+            content:
+              "The workload and reward calculation of work nodes are protected by TEE, and the nodes need not worry that their workload will not be rewarded, and they can not get extra rewards through cheating.",
+          },
+          {
+            icon: require("~/assets/images/imgs/img3.png"),
+            title: "Efficiency",
+            content:
+              "The proof of storage capacity does not require the challenge of large amount of redundancy, nor does it need to store any meaningless data. Both computing and storage resources can be efficiently utilized.",
+          },
+          {
+            icon: require("~/assets/images/imgs/img4.png"),
+            title: "Expansibility",
+            content:
+              "TEE supports complete computing, and has the potential of continuous development. Authmen ecosystem can achieve more powerful functions to ensure the development of evolution from storage consensus to computing consensus.",
+          },
+        ],
+      },
+      solutionsIndex: 0,
+      characteristicsObj: {
+        title: "Authmen’s characteristics",
         list: [
           {
             icon: "M",
-            title: "More Efficient And Secure Storage",
-            content:
-              "The design is exquisite and has stronger performance. It can realize the fast blockchain storage and traceability scheme corresponding to the key information system, and carry out the storage and transmission based on the blockchain in the process of data sharing."
+            title: "More Efficient and Secure Storage",
           },
           {
             icon: "R",
             title: "Real Tamper Proof Technology",
-            content:
-              "The design is exquisite and has stronger performance. It can realize the fast blockchain storage and traceability scheme corresponding to the key information system, and carry out the storage and transmission based on the blockchain in the process of data sharing."
           },
           {
             icon: "W",
             title: "Wider Application Scenarios",
-            content:
-              "It can provide efficient and convenient blockchain services for enterprises and institutions, and directly manage data through front-end pages. It can provide users with localized deployment of blockchain system."
           },
           {
             icon: "T",
             title: "Trusted Storage Node",
-            content:
-              "With the combination of the security technology of Trias trusted basic chain and Byzantine consensus algorithm after blockchain optimization, it innovatively increases the weight consensus proportion factor of reputation system."
-          }
-        ]
-      },
-      solutionsObj: {
-        title: "The Solutions",
-        list: [
-          {
-            icon: require("~/assets/images/icon1.jpg"),
-            title: "Automotive Solutions",
-            content:
-              "Authmen adopts the three-layer computing power system based on leviatom in Trias architecture, and the combination of TEE trusted computing and zero knowledge proof technology to complete the right confirmation and security protection of distributed storage data."
           },
-          {
-            icon: require("~/assets/images/icon2.jpg"),
-            title: "TEE technology",
-            content:
-              "The core of Levitom network is a set of Heterogeneous Consensus Graph algorithm (HCGraph) based on trusted technology. HCGraph is a combination of trusted computing technology based on heterogeneous TEE (Trusted Execution Environment) and graph computing technology based on small world network. HCGraph makes use of the transitivity of trust and uses the gossip protocol to realize the trusted relationship between consensus nodes using different TEE technologies."
-          }
-        ]
+        ],
       },
-      solutionsIndex: 0,
       footerIcons: [
         {
           icon: require("~/assets/images/t.png"),
-          path: "https://t.me/authmen"
+          path: "https://t.me/authmen",
         },
         {
           icon: require("~/assets/images/facebook.png"),
-          path: "https://www.facebook.com/AuthmenBlockchain/"
+          path: "https://www.facebook.com/AuthmenBlockchain/",
         },
         {
           icon: require("~/assets/images/medium.png"),
-          path: "https://medium.com/@authmen"
+          path: "https://medium.com/@authmen",
         },
         {
           icon: require("~/assets/images/twitter.png"),
-          path: "https://twitter.com/home"
-        }
-      ]
+          path: "https://twitter.com/home",
+        },
+        {
+          icon: require("~/assets/images/github.png"),
+          path: "https://github.com/Authmen/authmen-project",
+        },
+      ],
     };
   },
-  head () {
+  head() {
     return {
-      title: this.title
+      title: this.title,
     };
   },
   methods: {
-    openPdf () {
+    openPdf() {
       window.open(`/authmen.pdf?key=${Math.random()}`);
     },
-    _isMobile () {
+    _isMobile() {
       return /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent);
     },
-    changeLink (item) {
+    changeLink(item) {
       window.open(item.path);
     },
-    async handleScroll () {
+    async handleScroll() {
       let scrollTop =
         window.pageYOffset ||
         document.documentElement.scrollTop ||
@@ -239,24 +331,34 @@ export default {
         this.$refs.solutions.getBoundingClientRect &&
         this.$refs.solutions.getBoundingClientRect().top;
 
+      //关于auth特效
+      if (
+        850 >
+        (this.$refs.introduce &&
+          this.$refs.introduce.getBoundingClientRect &&
+          this.$refs.introduce.getBoundingClientRect().top)
+      ) {
+        this.showAbout = true;
+      }
+
       this.solutionsHeight =
         this.$refs.solutions &&
         parseInt(
           (this.$refs.solutions.offsetHeight -
             document.documentElement.clientWidth / 5.264 -
             50) /
-          this.solutionsObj.list.length
+            this.solutionsObj.list.length
         );
       if (this._isMobile()) {
         if (this.solutionsTop <= 500) {
-          this.solutionsIndex = 2;
+          this.solutionsIndex = 10;
         } else {
           this.solutionsIndex = 0;
         }
       } else {
-        if (this.solutionsTop <= 0) {
+        if (this.solutionsTop <= 200) {
           for (let v = 1; v <= this.solutionsObj.list.length; v++) {
-            if (Math.abs(this.solutionsTop) <= this.solutionsHeight * v) {
+            if (Math.abs(this.solutionsTop) + 180 <= this.solutionsHeight * v) {
               this.solutionsIndex = v;
               break;
             }
@@ -265,9 +367,9 @@ export default {
           this.solutionsIndex = 0;
         }
       }
-    }
+    },
   },
-  async mounted () {
+  async mounted() {
     this.$store.commit("SET_TITLE", this.title);
     if (this._isMobile()) {
       this.kind = 1;
@@ -275,11 +377,129 @@ export default {
     } else {
       window.addEventListener("scroll", this.handleScroll, true);
     }
-  }
+
+    setTimeout(() => {
+      this.homeIndexActive = true;
+    }, 300);
+  },
 };
 </script>
 
 <style lang="less" scoped>
+.animate {
+  font-size: 50px;
+}
+
+.animate span {
+  display: inline-block;
+}
+
+.trias {
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+  img {
+    height: 60px;
+  }
+}
+
+a.repeat {
+  display: inline-block;
+  font-size: 12px;
+  text-transform: none;
+  text-decoration: none;
+  color: orange;
+  padding: 5px 12px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  font-weight: normal;
+  margin: 0 0 0 50px;
+  border-radius: 3px;
+  position: relative;
+  bottom: 15px;
+}
+
+a.repeat:hover {
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+}
+
+.animate span:nth-of-type(2) {
+  animation-delay: 0.05s;
+}
+.animate span:nth-of-type(3) {
+  animation-delay: 0.1s;
+}
+.animate span:nth-of-type(4) {
+  animation-delay: 0.15s;
+}
+.animate span:nth-of-type(5) {
+  animation-delay: 0.2s;
+}
+.animate span:nth-of-type(6) {
+  animation-delay: 0.25s;
+}
+.animate span:nth-of-type(7) {
+  animation-delay: 0.3s;
+}
+.animate span:nth-of-type(8) {
+  animation-delay: 0.35s;
+}
+.animate span:nth-of-type(9) {
+  animation-delay: 0.4s;
+}
+.animate span:nth-of-type(10) {
+  animation-delay: 0.45s;
+}
+.animate span:nth-of-type(11) {
+  animation-delay: 0.5s;
+}
+.animate span:nth-of-type(12) {
+  animation-delay: 0.55s;
+}
+.animate span:nth-of-type(13) {
+  animation-delay: 0.6s;
+}
+.animate span:nth-of-type(14) {
+  animation-delay: 0.65s;
+}
+.animate span:nth-of-type(15) {
+  animation-delay: 0.7s;
+}
+.animate span:nth-of-type(16) {
+  animation-delay: 0.75s;
+}
+.animate span:nth-of-type(17) {
+  animation-delay: 0.8s;
+}
+.animate span:nth-of-type(18) {
+  animation-delay: 0.85s;
+}
+.animate span:nth-of-type(19) {
+  animation-delay: 0.9s;
+}
+.animate span:nth-of-type(20) {
+  animation-delay: 0.95s;
+}
+
+.one span {
+  // color: #e30a17;
+  opacity: 0;
+  transform: translate(-150px, -50px) rotate(-180deg) scale(3);
+  animation: revolveScale 0.4s forwards;
+}
+
+@keyframes revolveScale {
+  60% {
+    transform: translate(20px, 20px) rotate(30deg) scale(0.3);
+  }
+
+  100% {
+    transform: translate(0) rotate(0) scale(1);
+    opacity: 1;
+  }
+}
+
 .more-btn {
   outline: none;
   border: none;
@@ -317,6 +537,13 @@ export default {
   }
 }
 @media screen and (max-width: 1000px) {
+  .trias {
+    font-size: 22px !important;
+    margin-bottom: 30px !important;
+    img {
+      height: 50px !important;
+    }
+  }
   .more-btn {
     font-size: 16px !important;
     width: 220px !important;
@@ -330,17 +557,23 @@ export default {
   }
 
   .home-index {
-    h1 {
-      font-size: 26px !important;
-      span {
+    .home-index-d {
+      h1 {
         font-size: 26px !important;
+        span {
+          font-size: 26px !important;
+        }
+      }
+      div {
+        font-size: 12px !important;
+        line-height: 20px !important;
+        padding: 0 30px !important;
       }
     }
-    div {
-      font-size: 12px !important;
-      line-height: 20px !important;
-      padding: 0 30px !important;
-    }
+  }
+  .introduce-authmen {
+    padding: 0 15px;
+    margin-bottom: 80px !important;
   }
   .authmen-video {
     padding: 30px 15px 80px !important;
@@ -349,10 +582,18 @@ export default {
       height: 240px !important;
     }
   }
+  .public-title {
+    margin-bottom: 30px !important;
+    font-size: 26px !important;
+    span {
+      font-size: 26px !important;
+    }
+  }
   .main-feature {
     padding: 0 15px !important;
+    margin-bottom: 80px !important;
     h3 {
-      font-size: 40px !important;
+      font-size: 26px !important;
     }
     .pcTitle {
       display: none !important;
@@ -361,7 +602,11 @@ export default {
       display: block !important;
     }
     .main-list {
+      display: flex;
+      flex-direction: column;
       li {
+        width: 100% !important;
+        margin-bottom: 30px !important;
         .icon {
           width: 40px !important;
           height: 40px !important;
@@ -375,6 +620,7 @@ export default {
           }
           .main-describe {
             font-size: 12px !important;
+            line-height: 24px !important;
           }
         }
       }
@@ -407,6 +653,23 @@ export default {
           .main-describe {
             font-size: 12px !important;
           }
+        }
+      }
+    }
+    .characteristics-list {
+      flex-direction: column;
+      li {
+        width: 100% !important;
+        margin: 0 0 30px 0 !important;
+        padding: 0 !important;
+        span {
+          width: 40px !important;
+          height: 40px !important;
+          margin-right: 20px !important;
+          font-size: 20px !important;
+        }
+        p {
+          width: calc(~"100% - 60px");
         }
       }
     }
@@ -497,25 +760,32 @@ export default {
     justify-content: center;
     flex-direction: column;
     z-index: 99;
-    h1 {
-      font-size: 80px;
-      color: #000;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      span {
-        font-size: 80px;
+    .home-index-d {
+      opacity: 0;
+      transition: all 0.8s ease-in-out;
+      &.active {
+        opacity: 1;
       }
-    }
-    div {
-      margin-top: 30px;
-      font-size: 22px;
-      line-height: 34px;
-      color: rgba(0, 0, 0, 0.6);
-      text-align: center;
-      white-space: pre-wrap;
+      h1 {
+        font-size: 80px;
+        color: #000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        span {
+          font-size: 80px;
+        }
+      }
+      div {
+        margin-top: 30px;
+        font-size: 22px;
+        line-height: 34px;
+        color: rgba(0, 0, 0, 0.6);
+        text-align: center;
+        white-space: pre-wrap;
+      }
     }
   }
   .arrow {
@@ -544,29 +814,66 @@ export default {
       object-fit: fill;
     }
   }
+
+  .public-title {
+    font-size: 60px;
+    font-weight: bold;
+    margin-bottom: 80px;
+    position: relative;
+    padding-bottom: 20px;
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 32%;
+      height: 4px;
+      background: #e30a17;
+      border-radius: 3px;
+    }
+    span {
+      font-size: 60px;
+    }
+  }
+
+  .introduce-authmen {
+    margin-bottom: 200px;
+    p {
+      display: flex;
+      img {
+        height: 26px;
+        margin-right: 10px;
+      }
+      span {
+        font-size: 14px;
+        line-height: 28px;
+        color: #666;
+      }
+    }
+  }
   .main-feature {
-    margin-bottom: 100px;
+    margin-bottom: 150px;
     padding: 0 30px;
     h3 {
-      font-size: calc(~"100vw / 8");
+      // font-size: calc(~"100vw / 8");
       width: 100%;
       white-space: nowrap;
-      margin-bottom: 50px;
+      margin-bottom: 80px;
     }
     .wapTitle {
       display: none;
     }
     .main-list {
       display: flex;
-      flex-direction: column;
-      align-items: flex-end;
+      flex-wrap: wrap;
       li {
+        width: 50%;
         display: flex;
         margin-bottom: 100px;
         transition: all 0.3s;
         cursor: pointer;
         &:hover {
-          opacity: 0.5;
+          opacity: 0.6;
         }
         &:last-child {
           margin-bottom: 0;
@@ -575,13 +882,16 @@ export default {
           width: 80px;
           height: 80px;
           border-radius: 50%;
-          border: 1px solid #eee;
           display: flex;
           align-items: center;
           justify-content: center;
           font-weight: bold;
           font-size: 30px;
           margin-right: 40px;
+          img {
+            width: 100%;
+            height: 100%;
+          }
         }
         .information {
           width: 460px;
@@ -593,14 +903,14 @@ export default {
           .main-describe {
             color: rgba(0, 0, 0, 0.6);
             font-size: 14px;
-            line-height: 22px;
+            line-height: 28px;
           }
         }
       }
     }
     .solutions-list {
       li {
-        height: 100vh;
+        height: 60vh;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -637,7 +947,38 @@ export default {
           }
         }
         img {
-          height: 260px;
+          height: 200px;
+        }
+      }
+    }
+    .characteristics-list {
+      display: flex;
+      flex-wrap: wrap;
+      color: #333;
+      li {
+        width: calc(~"50% - 10px");
+        margin-bottom: 30px;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        p {
+          font-size: 16px;
+        }
+        span {
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: bold;
+          font-size: 30px;
+          margin-right: 40px;
+          border: 1px solid #e30a17;
+          color: #e30a17;
+        }
+        &:nth-child(2n) {
+          margin-left: 20px;
         }
       }
     }
