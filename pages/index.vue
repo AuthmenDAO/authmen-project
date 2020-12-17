@@ -296,7 +296,7 @@ export default {
         },
         {
           icon: require("~/assets/images/github.png"),
-          path: "https://github.com/Authmen/authmen-project",
+          path: "https://github.com/AuthmenDAO/authmen",
         },
       ],
     };
